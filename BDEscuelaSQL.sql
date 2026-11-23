@@ -1,6 +1,7 @@
 drop database if exists BD_escuela;
 create database BD_Escuela;
 use BD_Escuela;
+set sql_safe_updates=0;
 
 create table CentroDeEstudiantes (
 idCentro INT NOT NULL PRIMARY KEY
@@ -129,8 +130,6 @@ insert into Aulas values (1, 32, 2 ,1);
 insert into laboratorios values (5, 16, 1 ,1);
 insert into laboratorios values (7, 20, 3 ,1);
 
-
-
 select nombre, apellido, edad from alumnos;
 select apellido, edad from alumnos where edad >= 15;
 select nombre, apellido from alumnos order by edad;
@@ -139,6 +138,10 @@ select distinct apellido from alumnos;
 select count(*) as CantDeAlumnos, max(edad) as AlumnoMasViejo, min(edad) as AlumnoMasJoven from alumnos;
 select edad as EdadesDeLosAlumnos from alumnos group by edad;
 select apellido from alumnos group by apellido having count(*) > 1;
+
+select alumnos.nombre, cursos.año, cursos.division
+from alumnos
+right join cursos on cursos.idCurso = alumnos.idCurso;
 
 select nombre from alumnos;
 delete from alumnos where nombre = "Matias";
